@@ -1,8 +1,27 @@
 from django.http import HttpResponse
-
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Alumno, Docente, Administrador
-from .forms import AlumnoForm, DocenteForm, AdministradorForm
+
+
+#vista de inicio
+
+def inicio(request):
+    return render(request, "inicio.html")
+
+
+
+def alumno (req):
+
+    return render(req, "alumno.html")
+
+
+def docente (req):
+
+    return render(req, "docente.html")
+
+
+
+
 
 def lista_alumnos(request):
     alumnos = Alumno.objects.all()
@@ -14,13 +33,12 @@ def detalle_alumno(request, id_alumno):
 
 def agregar_alumno(request):
     if request.method == 'POST':
-        form = AlumnoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('tu_app:lista_alumnos')
+        # Aquí deberías procesar los datos del formulario si los tienes,
+        # o simplemente realizar la acción deseada si no tienes un formulario.
+        return redirect('AppART :lista_alumnos')
     else:
-        form = AlumnoForm()
-    return render(request, 'agregar_alumno.html', {'form': form})
+        # Aquí puedes mostrar un formulario si lo necesitas.
+        return render(request, 'agregar_alumno.html', {})
 
 # Vistas para Docentes y Administradores (análogas a las de Alumnos)
 
@@ -34,13 +52,11 @@ def detalle_docente(request, id_docente):
 
 def agregar_docente(request):
     if request.method == 'POST':
-        form = DocenteForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('tu_app:lista_docentes')
+        # Procesar datos del formulario o realizar la acción deseada.
+        return redirect('AppART:lista_docentes')
     else:
-        form = DocenteForm()
-    return render(request, 'agregar_docente.html', {'form': form})
+        # Mostrar un formulario si es necesario.
+        return render(request, 'agregar_docente.html', {})
 
 def lista_administradores(request):
     administradores = Administrador.objects.all()
@@ -52,10 +68,8 @@ def detalle_administrador(request, id_administrador):
 
 def agregar_administrador(request):
     if request.method == 'POST':
-        form = AdministradorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('tu_app:lista_administradores')
+        # Procesar datos del formulario o realizar la acción deseada.
+        return redirect('AppART:lista_administradores')
     else:
-        form = AdministradorForm()
-    return render(request, 'agregar_administrador.html', {'form': form})
+        # Mostrar un formulario si es necesario.
+        return render(request, 'agregar_administrador.html', {})
